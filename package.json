@@ -1,0 +1,14 @@
+{
+  "name": "office-monitoring-dashboard",
+  "version": "1.0.0",
+  "description": "Real-time Office Monitoring Command Center Dashboard",
+  "scripts": {
+    "install-all": "npm install --prefix frontend && npm install --prefix backend",
+    "start-backend": "npm start --prefix backend",
+    "start-frontend": "npm run dev --prefix frontend",
+    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

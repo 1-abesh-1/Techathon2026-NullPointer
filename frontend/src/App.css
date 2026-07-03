@@ -1,0 +1,133 @@
+/* Global CSS styling for Dashboard Command Center */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap');
+
+:root {
+  --bg-gradient: radial-gradient(circle at top, #0f172a 0%, #020617 100%);
+  --card-bg: rgba(30, 41, 59, 0.45);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --primary-accent: #00e5ff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.dashboard-app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header Styling */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  background: rgba(0, 229, 255, 0.1);
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.dashboard-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 0%, #00e5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Read-only Status Bar */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+  transition: background 0.4s ease;
+}
+
+.status-time {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--primary-accent);
+}
+
+/* Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+}
+
+.grid-left-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

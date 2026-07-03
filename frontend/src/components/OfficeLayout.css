@@ -1,0 +1,114 @@
+/* Office Layout Styling and Animations */
+
+.office-layout-container {
+  background: var(--card-bg, #1e293b);
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(8px);
+}
+
+.layout-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.layout-header-row h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.layout-instruction {
+  font-size: 0.85rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+.svg-wrapper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #090d16;
+}
+
+.office-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Lights glow */
+.light-glow-aura {
+  fill: #f59e0b;
+  opacity: 0.15;
+  filter: blur(8px);
+  animation: light-pulse 3s infinite ease-in-out;
+}
+
+.fan-glow-aura {
+  fill: #00e5ff;
+  opacity: 0.12;
+  filter: blur(8px);
+  animation: fan-pulse 2s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes light-pulse {
+  0%, 100% {
+    r: 24px;
+    opacity: 0.12;
+  }
+  50% {
+    r: 32px;
+    opacity: 0.22;
+  }
+}
+
+@keyframes fan-pulse {
+  0%, 100% {
+    r: 28px;
+    opacity: 0.1;
+  }
+  50% {
+    r: 36px;
+    opacity: 0.18;
+  }
+}
+
+/* Spinning blades animation */
+.spinning {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Interactive Device States */
+.layout-device {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.layout-device:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .layout-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

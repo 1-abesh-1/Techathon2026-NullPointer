@@ -1,0 +1,201 @@
+/* Device Panel CSS Styling */
+
+.device-panel-container {
+  background: var(--card-bg, #1e293b);
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  backdrop-filter: blur(8px);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.device-count-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.room-card {
+  background: #0f172a;
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.room-card:hover {
+  border-color: #475569;
+}
+
+.room-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+
+.room-card-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.room-active-count {
+  font-size: 0.8rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Border gradients or indicators for specific rooms */
+.room-drawing_room {
+  border-left: 3px solid #f59e0b;
+}
+
+.room-work_room_1 {
+  border-left: 3px solid #00e5ff;
+}
+
+.room-work_room_2 {
+  border-left: 3px solid #8b5cf6;
+}
+
+.room-devices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.device-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.device-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.device-row.row-active {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.device-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.device-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  transition: all 0.3s ease;
+}
+
+.icon-svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.device-icon-wrapper.icon-on.type-light {
+  background: rgba(245, 158, 11, 0.15);
+  color: #ffca28;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+}
+
+.device-icon-wrapper.icon-on.type-fan {
+  background: rgba(0, 229, 255, 0.15);
+  color: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+/* Make fan spin slightly in UI list too */
+.device-icon-wrapper.icon-on.type-fan .fan-spinning-icon {
+  animation: spin 1.5s linear infinite;
+}
+
+.device-name-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.device-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.device-wattage {
+  font-size: 0.75rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Read-only Status Badge */
+.device-status-badge {
+  display: flex;
+  align-items: center;
+}
+
+.status-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.badge-on {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.15);
+}
+
+.badge-off {
+  background: rgba(71, 85, 105, 0.2);
+  color: #64748b;
+  border: 1px solid rgba(71, 85, 105, 0.3);
+}
+

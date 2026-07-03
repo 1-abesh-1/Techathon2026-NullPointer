@@ -1,0 +1,164 @@
+/* Power Meter CSS */
+
+.power-meter-container {
+  background: var(--card-bg, #1e293b);
+  border: 1px solid var(--border-color, #334155);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.power-meter-container h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.power-hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.radial-meter-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.radial-meter {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.radial-bg {
+  fill: none;
+  stroke: #1e293b;
+  stroke-width: 8px;
+}
+
+.radial-fill {
+  fill: none;
+  stroke-width: 8px;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease, stroke 0.5s ease;
+}
+
+.radial-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.power-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary, #f1f5f9);
+  line-height: 1;
+}
+
+.power-unit {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted, #94a3b8);
+  margin-top: 4px;
+}
+
+.power-quick-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary, #f1f5f9);
+}
+
+/* Room Breakdown */
+.room-breakdown-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.room-breakdown-section h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary, #cbd5e1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.room-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.room-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #cbd5e1);
+}
+
+.room-wattage {
+  font-weight: 600;
+  color: var(--text-primary, #f1f5f9);
+}
+
+.bar-bg {
+  height: 8px;
+  background: #0f172a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.drawing-room-bar {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.workroom1-bar {
+  background: linear-gradient(90deg, #00e5ff, #00b0ff);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+.workroom2-bar {
+  background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+}
