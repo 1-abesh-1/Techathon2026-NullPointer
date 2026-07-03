@@ -1,32 +1,36 @@
 {
+  "dailyUsageWh": 12.9785,
+  "dashboard": {
+    "totalDailyEnergyWh": 1.652
+  },
   "rooms": {
     "Living Room": {
       "fans": {
         "Fan 1": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:49",
+          "lastChanged": "2026-07-04 04:06:49",
           "watts": 60
         },
         "Fan 2": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:51",
+          "lastChanged": "2026-07-04 04:06:51",
           "watts": 60
         }
       },
       "lights": {
         "Light 1": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:54",
+          "lastChanged": "2026-07-04 04:06:53",
           "watts": 15
         },
         "Light 2": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:47",
+          "lastChanged": "2026-07-04 04:06:46",
           "watts": 15
         },
         "Light 3": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:45",
+          "lastChanged": "2026-07-04 04:06:41",
           "watts": 15
         }
       }
@@ -34,30 +38,30 @@
     "WorkRoom1": {
       "fans": {
         "Fan 1": {
-          "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:40",
-          "watts": 60
+          "isSwitchedOn": false,
+          "lastChanged": "InitializationReset",
+          "watts": 0
         },
         "Fan 2": {
-          "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:38",
-          "watts": 60
+          "isSwitchedOn": false,
+          "lastChanged": "InitializationReset",
+          "watts": 0
         }
       },
       "lights": {
         "Light 1": {
-          "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:42",
-          "watts": 15
+          "isSwitchedOn": false,
+          "lastChanged": "InitializationReset",
+          "watts": 0
         },
         "Light 2": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:36",
+          "lastChanged": "2026-07-04 04:07:07",
           "watts": 15
         },
         "Light 3": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:34",
+          "lastChanged": "2026-07-04 04:07:08",
           "watts": 15
         }
       }
@@ -65,30 +69,30 @@
     "WorkRoom2": {
       "fans": {
         "Fan 1": {
-          "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:58",
-          "watts": 60
+          "isSwitchedOn": false,
+          "lastChanged": "InitializationReset",
+          "watts": 0
         },
         "Fan 2": {
-          "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:46:08",
-          "watts": 60
+          "isSwitchedOn": false,
+          "lastChanged": "InitializationReset",
+          "watts": 0
         }
       },
       "lights": {
         "Light 1": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:31",
+          "lastChanged": "2026-07-04 04:07:04",
           "watts": 15
         },
         "Light 2": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:25",
+          "lastChanged": "2026-07-04 04:07:02",
           "watts": 15
         },
         "Light 3": {
           "isSwitchedOn": true,
-          "lastChanged": "2026-07-03 23:45:27",
+          "lastChanged": "2026-07-04 04:06:57",
           "watts": 15
         }
       }
