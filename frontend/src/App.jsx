@@ -1,24 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import OfficeLayout from './components/OfficeLayout';
 import PowerMeter from './components/PowerMeter';
 import DevicePanel from './components/DevicePanel';
+import AlertsPanel from './components/AlertsPanel';
 import { subscribeToDbStream } from './services/firebase';
+import { computeAlerts, isAfterOfficeHours } from './utils/alerts';
 import './App.css';
 
 function App() {
   const [rooms, setRooms] = useState({});
   const [connected, setConnected] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
     const unsubscribe = subscribeToDbStream((data) => {
       setRooms(data.rooms || {});
       setConnected(true);
       setLastUpdated(new Date());
+      setNow(new Date());
     });
 
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const alerts = useMemo(() => computeAlerts(rooms, now), [rooms, now]);
+  const afterHours = isAfterOfficeHours(now);
 
   return (
     <div className="dashboard-app">
@@ -47,6 +59,11 @@ function App() {
               </span>
             </div>
           )}
+          <div className="status-pill">
+            {afterHours
+              ? <><span>🔴</span><span>After Hours</span></>
+              : <><span>🟢</span><span>Office Hours</span></>}
+          </div>
         </div>
       </header>
 
@@ -56,6 +73,7 @@ function App() {
         </div>
         <div className="grid-right-col">
           <PowerMeter rooms={rooms} />
+          <AlertsPanel alerts={alerts} />
         </div>
       </main>
 

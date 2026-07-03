@@ -6,10 +6,12 @@ const AlertsPanel = ({ alerts }) => {
     <div className="alerts-panel-container">
       <div className="alerts-header">
         <div className="alerts-title-block">
-          <span className="alert-bell-icon">🔔</span>
-          <h3>Active Anomalous Alerts</h3>
+          <span className="alert-bell-icon">{alerts.length > 0 ? '🔔' : '🔕'}</span>
+          <h3>Active Alerts</h3>
         </div>
-
+        {alerts.length > 0 && (
+          <span className="alerts-count-badge">{alerts.length}</span>
+        )}
       </div>
 
       <div className="alerts-list">

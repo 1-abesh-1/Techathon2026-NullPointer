@@ -44,6 +44,18 @@
   color: var(--text-primary, #f1f5f9);
 }
 
+.alerts-count-badge {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  min-width: 28px;
+  text-align: center;
+}
+
 .clear-alerts-btn {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -127,6 +139,11 @@
 .alert-card.priority-high {
   border-left-color: #ef4444;
   background: rgba(239, 68, 68, 0.06);
+}
+
+.alert-card.priority-medium {
+  border-left-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.05);
 }
 
 .alert-header {
