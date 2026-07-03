@@ -23,10 +23,10 @@ async function fetchDashboardData() {
 // ── Room name → query name mapping ─────────────────────────────
 
 const ROOM_ALIASES = {
-  // Drawing Room
-  'drawing': 'Drawing Room',
-  'drawing room': 'Drawing Room',
-  'dr': 'Drawing Room',
+  // Living Room
+  'living': 'Living Room',
+  'living room': 'Living Room',
+  'lr': 'Living Room',
   // Work Room 1
   'work1': 'WorkRoom1',
   'work room 1': 'WorkRoom1',
