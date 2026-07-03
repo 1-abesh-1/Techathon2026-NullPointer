@@ -17,25 +17,25 @@ let dbState = {
   
   devices: {
     // Drawing Room
-    'drawing_room_light_1': { id: 'light_1', name: 'Light 1', type: 'light', room: 'drawing_room', status: false, power: 15, lastToggled: new Date().toISOString(), x: 140, y: 110 },
-    'drawing_room_light_2': { id: 'light_2', name: 'Light 2', type: 'light', room: 'drawing_room', status: false, power: 15, lastToggled: new Date().toISOString(), x: 280, y: 110 },
-    'drawing_room_light_3': { id: 'light_3', name: 'Light 3', type: 'light', room: 'drawing_room', status: false, power: 15, lastToggled: new Date().toISOString(), x: 215, y: 360 },
-    'drawing_room_fan_1': { id: 'fan_1', name: 'Fan 1', type: 'fan', room: 'drawing_room', status: false, power: 75, lastToggled: new Date().toISOString(), x: 215, y: 155 },
-    'drawing_room_fan_2': { id: 'fan_2', name: 'Fan 2', type: 'fan', room: 'drawing_room', status: false, power: 75, lastToggled: new Date().toISOString(), x: 215, y: 300 },
+    'drawing_room_light_1': { id: 'light_1', name: 'Light 1', type: 'light', room: 'drawing_room', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'drawing_room_light_2': { id: 'light_2', name: 'Light 2', type: 'light', room: 'drawing_room', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'drawing_room_light_3': { id: 'light_3', name: 'Light 3', type: 'light', room: 'drawing_room', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'drawing_room_fan_1':   { id: 'fan_1',   name: 'Fan 1',   type: 'fan',   room: 'drawing_room', status: false, power: 75, lastToggled: new Date().toISOString() },
+    'drawing_room_fan_2':   { id: 'fan_2',   name: 'Fan 2',   type: 'fan',   room: 'drawing_room', status: false, power: 75, lastToggled: new Date().toISOString() },
 
     // Work Room 1
-    'work_room_1_light_1': { id: 'light_1', name: 'Light 1', type: 'light', room: 'work_room_1', status: false, power: 15, lastToggled: new Date().toISOString(), x: 380, y: 110 },
-    'work_room_1_light_2': { id: 'light_2', name: 'Light 2', type: 'light', room: 'work_room_1', status: false, power: 15, lastToggled: new Date().toISOString(), x: 510, y: 110 },
-    'work_room_1_light_3': { id: 'light_3', name: 'Light 3', type: 'light', room: 'work_room_1', status: false, power: 15, lastToggled: new Date().toISOString(), x: 440, y: 360 },
-    'work_room_1_fan_1': { id: 'fan_1', name: 'Fan 1', type: 'fan', room: 'work_room_1', status: false, power: 75, lastToggled: new Date().toISOString(), x: 440, y: 155 },
-    'work_room_1_fan_2': { id: 'fan_2', name: 'Fan 2', type: 'fan', room: 'work_room_1', status: false, power: 75, lastToggled: new Date().toISOString(), x: 440, y: 275 },
+    'work_room_1_light_1': { id: 'light_1', name: 'Light 1', type: 'light', room: 'work_room_1', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'work_room_1_light_2': { id: 'light_2', name: 'Light 2', type: 'light', room: 'work_room_1', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'work_room_1_light_3': { id: 'light_3', name: 'Light 3', type: 'light', room: 'work_room_1', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'work_room_1_fan_1':   { id: 'fan_1',   name: 'Fan 1',   type: 'fan',   room: 'work_room_1', status: false, power: 75, lastToggled: new Date().toISOString() },
+    'work_room_1_fan_2':   { id: 'fan_2',   name: 'Fan 2',   type: 'fan',   room: 'work_room_1', status: false, power: 75, lastToggled: new Date().toISOString() },
 
     // Work Room 2
-    'work_room_2_light_1': { id: 'light_1', name: 'Light 1', type: 'light', room: 'work_room_2', status: false, power: 15, lastToggled: new Date().toISOString(), x: 680, y: 110 },
-    'work_room_2_light_2': { id: 'light_2', name: 'Light 2', type: 'light', room: 'work_room_2', status: false, power: 15, lastToggled: new Date().toISOString(), x: 810, y: 110 },
-    'work_room_2_light_3': { id: 'light_3', name: 'Light 3', type: 'light', room: 'work_room_2', status: false, power: 15, lastToggled: new Date().toISOString(), x: 740, y: 360 },
-    'work_room_2_fan_1': { id: 'fan_1', name: 'Fan 1', type: 'fan', room: 'work_room_2', status: false, power: 75, lastToggled: new Date().toISOString(), x: 740, y: 155 },
-    'work_room_2_fan_2': { id: 'fan_2', name: 'Fan 2', type: 'fan', room: 'work_room_2', status: false, power: 75, lastToggled: new Date().toISOString(), x: 740, y: 275 },
+    'work_room_2_light_1': { id: 'light_1', name: 'Light 1', type: 'light', room: 'work_room_2', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'work_room_2_light_2': { id: 'light_2', name: 'Light 2', type: 'light', room: 'work_room_2', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'work_room_2_light_3': { id: 'light_3', name: 'Light 3', type: 'light', room: 'work_room_2', status: false, power: 15, lastToggled: new Date().toISOString() },
+    'work_room_2_fan_1':   { id: 'fan_1',   name: 'Fan 1',   type: 'fan',   room: 'work_room_2', status: false, power: 75, lastToggled: new Date().toISOString() },
+    'work_room_2_fan_2':   { id: 'fan_2',   name: 'Fan 2',   type: 'fan',   room: 'work_room_2', status: false, power: 75, lastToggled: new Date().toISOString() },
   },
 
   alerts: [],

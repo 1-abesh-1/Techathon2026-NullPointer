@@ -1,15 +1,32 @@
-/* Device Panel CSS Styling */
+/* Device Panel CSS — Polished */
 
 .device-panel-container {
-  background: var(--card-bg, #1e293b);
-  border: 1px solid var(--border-color, #334155);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 16px;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.device-panel-container:hover {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.device-panel-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.4), transparent);
 }
 
 .panel-header {
@@ -21,38 +38,45 @@
 .panel-header h3 {
   margin: 0;
   font-size: 1.25rem;
-  color: var(--text-primary, #f1f5f9);
+  color: #f1f5f9;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
 }
 
 .device-count-badge {
   background: rgba(16, 185, 129, 0.15);
   color: #10b981;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
   border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
 }
 
 .rooms-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .room-card {
-  background: #0f172a;
-  border: 1px solid var(--border-color, #334155);
-  border-radius: 12px;
-  padding: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .room-card:hover {
-  border-color: #475569;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .room-card-header {
@@ -66,16 +90,17 @@
 .room-card-header h4 {
   margin: 0;
   font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary, #f1f5f9);
+  font-weight: 700;
+  color: #e2e8f0;
+  font-family: 'Outfit', sans-serif;
 }
 
 .room-active-count {
   font-size: 0.8rem;
-  color: var(--text-muted, #94a3b8);
+  color: #64748b;
 }
 
-/* Border gradients or indicators for specific rooms */
+/* Room color indicators */
 .room-drawing_room {
   border-left: 3px solid #f59e0b;
 }
@@ -98,20 +123,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.25s ease;
 }
 
 .device-row:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 .device-row.row-active {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.05);
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 .device-info {
@@ -123,13 +149,14 @@
 .device-icon-wrapper {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  background: #1e293b;
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #64748b;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .icon-svg {
@@ -140,17 +167,16 @@
 
 .device-icon-wrapper.icon-on.type-light {
   background: rgba(245, 158, 11, 0.15);
-  color: #ffca28;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
 }
 
 .device-icon-wrapper.icon-on.type-fan {
   background: rgba(0, 229, 255, 0.15);
   color: #00e5ff;
-  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.25);
 }
 
-/* Make fan spin slightly in UI list too */
 .device-icon-wrapper.icon-on.type-fan .fan-spinning-icon {
   animation: spin 1.5s linear infinite;
 }
@@ -162,16 +188,15 @@
 
 .device-name {
   font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-primary, #f1f5f9);
+  font-weight: 600;
+  color: #cbd5e1;
 }
 
 .device-wattage {
   font-size: 0.75rem;
-  color: var(--text-muted, #94a3b8);
+  color: #64748b;
 }
 
-/* Read-only Status Badge */
 .device-status-badge {
   display: flex;
   align-items: center;
@@ -197,5 +222,11 @@
   background: rgba(71, 85, 105, 0.2);
   color: #64748b;
   border: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+@media (max-width: 768px) {
+  .device-panel-container {
+    padding: 16px;
+  }
 }
 

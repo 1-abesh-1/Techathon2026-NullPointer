@@ -1,80 +1,125 @@
-/* Global CSS styling for Dashboard Command Center */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap');
+/* Global CSS styling for Dashboard Command Center — Polished Edition */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-gradient: radial-gradient(circle at top, #0f172a 0%, #020617 100%);
-  --card-bg: rgba(30, 41, 59, 0.45);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --text-primary: #f8fafc;
+  --bg-dark: #020617;
+  --bg-card: rgba(15, 23, 42, 0.55);
+  --bg-card-hover: rgba(30, 41, 59, 0.5);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-glow: rgba(0, 229, 255, 0.15);
+  --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
   --text-muted: #64748b;
   --primary-accent: #00e5ff;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: var(--bg-gradient);
-  color: var(--text-primary);
-  min-height: 100vh;
+  --accent-green: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-purple: #8b5cf6;
+  --accent-red: #ef4444;
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --card-shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --glass-blur: 16px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
 }
 
 .dashboard-app {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 20px 24px 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  min-height: 100vh;
 }
 
-/* Header Styling */
+/* ==================== HEADER ==================== */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-color);
+  gap: 20px;
+  padding: 24px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-accent), var(--accent-purple), transparent);
+  animation: header-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes header-glow {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .logo-icon {
   font-size: 2.5rem;
-  background: rgba(0, 229, 255, 0.1);
-  padding: 8px;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(139, 92, 246, 0.15));
+  padding: 10px;
+  border-radius: var(--radius-md);
   border: 1px solid rgba(0, 229, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
+  animation: logo-pulse 3s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); }
 }
 
 .dashboard-header h1 {
   font-family: 'Outfit', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 800;
   margin: 0;
-  background: linear-gradient(135deg, #ffffff 0%, #00e5ff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #00e5ff 50%, #8b5cf6 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: text-shimmer 4s linear infinite;
+  letter-spacing: -0.5px;
+}
+
+@keyframes text-shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 .subtitle {
   margin: 4px 0 0 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
-/* Read-only Status Bar */
+/* Status Bar */
 .status-bar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -82,14 +127,22 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.7);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  font-weight: 500;
+  border-radius: var(--radius-full);
+  padding: 7px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
   color: var(--text-secondary);
   white-space: nowrap;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.status-pill:hover {
+  border-color: var(--border-glow);
+  background: rgba(0, 229, 255, 0.05);
+  transform: translateY(-1px);
 }
 
 .status-dot {
@@ -97,37 +150,70 @@ body {
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
-  box-shadow: 0 0 6px currentColor;
-  transition: background 0.4s ease;
+  box-shadow: 0 0 8px currentColor;
+  animation: dot-blink 2s ease-in-out infinite;
+}
+
+@keyframes dot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .status-time {
-  font-family: monospace;
+  font-family: 'Outfit', monospace;
   font-weight: 700;
   color: var(--primary-accent);
+  font-size: 0.85rem;
 }
 
-/* Grid Layout */
+/* ==================== MAIN GRID ==================== */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
 }
 
 .grid-left-col {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .grid-right-col {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
-/* Responsiveness */
+/* ==================== FOOTER ==================== */
+.dashboard-footer {
+  margin-top: auto;
+}
+
+/* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
+
+@media (max-width: 640px) {
+  .dashboard-app {
+    padding: 12px 14px 24px;
+    gap: 14px;
+  }
+  .dashboard-header {
+    padding: 18px 20px;
+  }
+  .dashboard-header h1 {
+    font-size: 1.4rem;
+  }
+  .status-bar {
+    width: 100%;
+  }
+}
+

@@ -1,0 +1,97 @@
+{
+  "rooms": {
+    "Living Room": {
+      "fans": {
+        "Fan 1": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:49",
+          "watts": 60
+        },
+        "Fan 2": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:51",
+          "watts": 60
+        }
+      },
+      "lights": {
+        "Light 1": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:54",
+          "watts": 15
+        },
+        "Light 2": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:47",
+          "watts": 15
+        },
+        "Light 3": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:45",
+          "watts": 15
+        }
+      }
+    },
+    "WorkRoom1": {
+      "fans": {
+        "Fan 1": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:40",
+          "watts": 60
+        },
+        "Fan 2": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:38",
+          "watts": 60
+        }
+      },
+      "lights": {
+        "Light 1": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:42",
+          "watts": 15
+        },
+        "Light 2": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:36",
+          "watts": 15
+        },
+        "Light 3": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:34",
+          "watts": 15
+        }
+      }
+    },
+    "WorkRoom2": {
+      "fans": {
+        "Fan 1": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:58",
+          "watts": 60
+        },
+        "Fan 2": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:46:08",
+          "watts": 60
+        }
+      },
+      "lights": {
+        "Light 1": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:31",
+          "watts": 15
+        },
+        "Light 2": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:25",
+          "watts": 15
+        },
+        "Light 3": {
+          "isSwitchedOn": true,
+          "lastChanged": "2026-07-03 23:45:27",
+          "watts": 15
+        }
+      }
+    }
+  }
+}

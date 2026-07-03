@@ -1,49 +1,41 @@
 import React from 'react';
 import './DevicePanel.css';
+import { getRoomDevices, countDevices } from '../utils/roomData';
 
-const DevicePanel = ({ devices, rooms }) => {
-  const getDevicesInRoom = (roomKey) => {
-    return Object.entries(devices)
-      .filter(([_, d]) => d.room === roomKey)
-      .sort((a, b) => {
-        if (a[1].type !== b[1].type) {
-          return a[1].type === 'light' ? -1 : 1;
-        }
-        return a[1].name.localeCompare(b[1].name);
-      });
-  };
+const DevicePanel = ({ rooms }) => {
+  const { active: totalActive } = countDevices(rooms);
+  const roomNames = Object.keys(rooms);
 
   return (
     <div className="device-panel-container">
       <div className="panel-header">
-        <h3>Live Device Status</h3>
-        <span className="device-count-badge">
-          {Object.values(devices).filter(d => d.status).length} Active
-        </span>
+        <h3>Device Status</h3>
+        <span className="device-count-badge">{totalActive} Active</span>
       </div>
 
       <div className="rooms-grid">
-        {Object.entries(rooms).map(([roomKey, roomInfo]) => {
-          const roomDevices = getDevicesInRoom(roomKey);
+        {roomNames.map((roomName) => {
+          const roomDevices = getRoomDevices(rooms, roomName);
+          const activeInRoom = roomDevices.filter((d) => d.isSwitchedOn).length;
 
           return (
-            <div key={roomKey} className={`room-card room-${roomKey}`}>
+            <div key={roomName} className="room-card">
               <div className="room-card-header">
-                <h4>{roomInfo.name}</h4>
+                <h4>{roomName}</h4>
                 <span className="room-active-count">
-                  {roomDevices.filter(([_, d]) => d.status).length} / {roomDevices.length} ON
+                  {activeInRoom} / {roomDevices.length} ON
                 </span>
               </div>
 
               <div className="room-devices-list">
-                {roomDevices.map(([key, device]) => {
-                  const isOn = device.status;
-                  const isLight = device.type === 'light';
+                {roomDevices.map((device) => {
+                  const isOn = device.isSwitchedOn;
+                  const isLight = device.category === 'lights';
 
                   return (
-                    <div key={key} className={`device-row ${isOn ? 'row-active' : ''}`}>
+                    <div key={device.key} className={`device-row ${isOn ? 'row-active' : ''}`}>
                       <div className="device-info">
-                        <div className={`device-icon-wrapper ${isOn ? 'icon-on' : ''} type-${device.type}`}>
+                        <div className={`device-icon-wrapper ${isOn ? 'icon-on' : ''} type-${device.category === 'lights' ? 'light' : 'fan'}`}>
                           {isLight ? (
                             <svg viewBox="0 0 24 24" className="icon-svg">
                               <path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7zm2 18h-4c-.55 0-1 .45-1 1s.45 1 1 1h4c.55 0 1-.45 1-1s-.45-1-1-1z" />
@@ -55,8 +47,8 @@ const DevicePanel = ({ devices, rooms }) => {
                           )}
                         </div>
                         <div className="device-name-block">
-                          <span className="device-name">{device.name}</span>
-                          <span className="device-wattage">{device.power} W</span>
+                          <span className="device-name">{device.deviceName}</span>
+                          <span className="device-wattage">{device.watts} W</span>
                         </div>
                       </div>
 
