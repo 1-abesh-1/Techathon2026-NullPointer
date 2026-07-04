@@ -19,7 +19,28 @@
     { "type": "wokwi-slide-switch", "id": "sw12", "top": 234.8, "left": 156.7, "attrs": {} },
     { "type": "wokwi-slide-switch", "id": "sw13", "top": 186.8, "left": 223.9, "attrs": {} },
     { "type": "wokwi-slide-switch", "id": "sw14", "top": 186.8, "left": 175.9, "attrs": {} },
-    { "type": "wokwi-slide-switch", "id": "sw15", "top": 186.8, "left": 127.9, "attrs": {} }
+    { "type": "wokwi-slide-switch", "id": "sw15", "top": 186.8, "left": 127.9, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "text1",
+      "top": 268.8,
+      "left": -230.4,
+      "attrs": { "text": "Living Room" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text2",
+      "top": 278.4,
+      "left": 220.8,
+      "attrs": { "text": "Work Room 2" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text3",
+      "top": -67.2,
+      "left": 249.6,
+      "attrs": { "text": "Work Room 1" }
+    }
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
