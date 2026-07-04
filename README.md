@@ -62,9 +62,9 @@ A Discord bot for the **Null Pointer** office monitoring system. It reads real-t
 
 ## Features
 
-- **`/status`** — Show the on/off status of fans and lights across all rooms, plus total power draw.
-- **`/room <name>`** — Get detailed info for a specific room (supports aliases like `work1`, `drawing`, `lr`, etc.).
-- **`/usage`** — View current power draw, today's estimated kWh, and projected monthly usage.
+- **`!status`** — Show the on/off status of fans and lights across all rooms, plus total power draw.
+- **`!room <name>`** — Get detailed info for a specific room (supports aliases like `work1`, `drawing`, `lr`, etc.).
+- **`!usage`** — View current power draw, today's estimated kWh, and projected monthly usage.
 - **Automated alerts** — Detects devices left on during late hours (10 PM – 6 AM) and posts warnings to the configured alert channel.
 
 ## Prerequisites
@@ -102,19 +102,19 @@ A Discord bot for the **Null Pointer** office monitoring system. It reads real-t
    npm run dev        # Development mode (auto-restart on file changes)
    ```
 
-## Slash Commands
+## Bot Commands
 
-After starting the bot for the first time, register the slash commands in your Discord server:
+After starting the bot, use these commands in any Discord text channel:
 
 | Command | Description | Example |
 |---------|-------------|---------|
-| `/status` | Show status of all rooms | `/status` |
-| `/room` | Show status of a specific room | `/room name:work1` |
-| `/usage` | Show power usage statistics | `/usage` |
+| `!status` | Show status of all rooms | `!status` |
+| `!room` | Show status of a specific room | `!room work1` |
+| `!usage` | Show power usage statistics | `!usage` |
 
 ### Room Name Aliases
 
-The `/room` command accepts multiple aliases:
+The `!room` command accepts multiple aliases:
 
 | Alias | Maps To |
 |-------|---------|
