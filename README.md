@@ -74,6 +74,7 @@ A Discord bot for the **Null Pointer** office monitoring system. It reads real-t
 1. **Install dependencies:**
 
    ```bash
+   cd ../discord-bot
    npm install
    ```
 
