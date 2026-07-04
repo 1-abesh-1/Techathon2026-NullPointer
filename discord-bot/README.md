@@ -1,12 +1,16 @@
 # Null Pointer Discord Bot
 
-A Discord bot for the **Null Pointer** office monitoring system. It reads real-time device data from Firebase and provides room status, power usage reports, and automated alerts via slash commands.
+A Discord bot for the **Null Pointer** office monitoring system. It reads real-time device data from Firebase and provides room status, power usage reports, and automated alerts via text commands.
 
 ## Features
 
 - **`!status`** — Show the on/off status of fans and lights across all rooms, plus total power draw.
 - **`!room <name>`** — Get detailed info for a specific room (supports aliases like `work1`, `drawing`, `lr`, etc.).
 - **`!usage`** — View current power draw, today's estimated kWh, and projected monthly usage.
+- **`!uptime`** — See how long each device has been in its current state (ON/OFF).
+- **`!energy`** — Estimate energy consumed per device since it was last toggled.
+- **`!overdue`** — Flag devices that have been on for more than 4 hours.
+- **`!top`** — Power rankings of rooms sorted by current wattage draw.
 - **Automated alerts** — Detects devices left on during late hours (10 PM – 6 AM) and posts warnings to the configured alert channel.
 
 ## Prerequisites
@@ -43,19 +47,23 @@ A Discord bot for the **Null Pointer** office monitoring system. It reads real-t
    npm run dev        # Development mode (auto-restart on file changes)
    ```
 
-## Slash Commands
+## Bot Commands
 
-After starting the bot for the first time, register the slash commands in your Discord server:
+Use these commands in any Discord text channel:
 
 | Command | Description | Example |
 |---------|-------------|---------|
 | `!status` | Show status of all rooms | `!status` |
 | `!room` | Show status of a specific room | `!room work1` |
 | `!usage` | Show power usage statistics | `!usage` |
+| `!uptime` | Show how long each device has been on/off | `!uptime` |
+| `!energy` | Estimate energy consumed per device | `!energy` |
+| `!overdue` | Flag devices on for >4 hours | `!overdue` |
+| `!top` | Power rankings of rooms | `!top` |
 
 ### Room Name Aliases
 
-The `/room` command accepts multiple aliases:
+The `!room` command accepts multiple aliases:
 
 | Alias | Maps To |
 |-------|---------|

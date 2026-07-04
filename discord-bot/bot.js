@@ -117,6 +117,34 @@ function friendlyDeviceList(onList) {
   return `${onList.slice(0, 3).join(', ')} and ${onList.length - 3} more`;
 }
 
+// ── Time formatting helpers ────────────────────────────────────
+
+function formatDuration(ms) {
+  const totalSec = Math.floor(ms / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  if (h === 0 && m === 0) return 'just now';
+  if (h === 0) return `${m}m`;
+  if (m === 0) return `${h}h`;
+  return `${h}h ${m}m`;
+}
+
+function formatDurationVerbose(ms) {
+  const totalSec = Math.floor(ms / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  if (h === 0 && m === 0) return 'just now';
+  if (h === 0) return `${m} minute${m === 1 ? '' : 's'}`;
+  if (m === 0) return `${h} hour${h === 1 ? '' : 's'}`;
+  return `${h} hour${h === 1 ? '' : 's'} and ${m} minute${m === 1 ? '' : 's'}`;
+}
+
+function parseLastChanged(ts) {
+  if (!ts || ts === 'InitializationReset') return null;
+  const d = new Date(ts);
+  return isNaN(d.getTime()) ? null : d;
+}
+
 // ── Command handlers ───────────────────────────────────────────
 
 function handleStatus(data) {
@@ -230,6 +258,181 @@ function handleUsage(data) {
   }
 
   return { content };
+}
+
+// ── !uptime command ────────────────────────────────────────────
+
+function handleUptime(data) {
+  const rooms = data.rooms || {};
+  const now = new Date();
+  const lines = [];
+  let hasUptime = false;
+
+  for (const [roomName, roomData] of Object.entries(rooms)) {
+    const roomDevices = [];
+
+    for (const [devName, dev] of Object.entries(roomData.fans || {})) {
+      const changed = parseLastChanged(dev.lastChanged);
+      if (changed) {
+        const elapsed = now - changed;
+        roomDevices.push({ name: devName, type: 'fan', elapsed, isOn: dev.isSwitchedOn });
+      }
+    }
+
+    for (const [devName, dev] of Object.entries(roomData.lights || {})) {
+      const changed = parseLastChanged(dev.lastChanged);
+      if (changed) {
+        const elapsed = now - changed;
+        roomDevices.push({ name: devName, type: 'light', elapsed, isOn: dev.isSwitchedOn });
+      }
+    }
+
+    if (roomDevices.length > 0) {
+      hasUptime = true;
+      lines.push(`\`${roomName}\`:`);
+      for (const dev of roomDevices) {
+        const emoji = dev.type === 'fan' ? '🌀' : '💡';
+        const state = dev.isOn ? 'ON' : 'OFF';
+        lines.push(`  ${emoji} ${dev.name} (${state}) — ${formatDurationVerbose(dev.elapsed)}`);
+      }
+      lines.push('');
+    }
+  }
+
+  if (!hasUptime) {
+    return { content: `${timeGreeting()}\nHmm, no timestamp data available yet. The devices are still warming up! 🔌` };
+  }
+
+  const greeting = timeGreeting();
+  return { content: `${greeting}\nHere's the uptime party report! 🎉\n\n${lines.join('\n').trim()}` };
+}
+
+// ── !energy command ────────────────────────────────────────────
+
+function handleEnergy(data) {
+  const rooms = data.rooms || {};
+  const now = new Date();
+  const lines = [];
+  let grandTotalWh = 0;
+  let hasEnergy = false;
+
+  for (const [roomName, roomData] of Object.entries(rooms)) {
+    const roomDevices = [];
+
+    for (const [devName, dev] of Object.entries(roomData.fans || {})) {
+      const changed = parseLastChanged(dev.lastChanged);
+      if (changed && dev.isSwitchedOn) {
+        const elapsedHrs = (now - changed) / 3600000;
+        const wh = (dev.watts || 0) * elapsedHrs;
+        grandTotalWh += wh;
+        roomDevices.push({ name: devName, type: 'fan', wh, watts: dev.watts });
+      }
+    }
+
+    for (const [devName, dev] of Object.entries(roomData.lights || {})) {
+      const changed = parseLastChanged(dev.lastChanged);
+      if (changed && dev.isSwitchedOn) {
+        const elapsedHrs = (now - changed) / 3600000;
+        const wh = (dev.watts || 0) * elapsedHrs;
+        grandTotalWh += wh;
+        roomDevices.push({ name: devName, type: 'light', wh, watts: dev.watts });
+      }
+    }
+
+    if (roomDevices.length > 0) {
+      hasEnergy = true;
+      lines.push(`\`${roomName}\`:`);
+      for (const dev of roomDevices) {
+        const emoji = dev.type === 'fan' ? '🌀' : '💡';
+        lines.push(`  ${emoji} ${dev.name}: ${dev.wh.toFixed(2)} Wh (${dev.watts}W)`);
+      }
+      lines.push('');
+    }
+  }
+
+  if (!hasEnergy) {
+    return { content: `${timeGreeting()}\nNo devices are currently running, so no energy is being consumed! 🎉 Zero is a beautiful number.` };
+  }
+
+  const greeting = timeGreeting();
+  const totalKwh = (grandTotalWh / 1000).toFixed(4);
+  return { content: `${greeting}\nEnergy consumption report! ⚡📊\n\n${lines.join('\n').trim()}\n\n🔋 **Total energy consumed: ${totalKwh} kWh (${grandTotalWh.toFixed(2)} Wh)**` };
+}
+
+// ── !overdue command ───────────────────────────────────────────
+
+function handleOverdue(data) {
+  const rooms = data.rooms || {};
+  const now = new Date();
+  const overdue = [];
+  const thresholdMs = 4 * 3600 * 1000; // 4 hours
+
+  for (const [roomName, roomData] of Object.entries(rooms)) {
+    for (const [devName, dev] of Object.entries(roomData.fans || {})) {
+      const changed = parseLastChanged(dev.lastChanged);
+      if (changed && dev.isSwitchedOn && (now - changed) > thresholdMs) {
+        overdue.push({ room: roomName, name: devName, type: 'fan', elapsed: now - changed });
+      }
+    }
+    for (const [devName, dev] of Object.entries(roomData.lights || {})) {
+      const changed = parseLastChanged(dev.lastChanged);
+      if (changed && dev.isSwitchedOn && (now - changed) > thresholdMs) {
+        overdue.push({ room: roomName, name: devName, type: 'light', elapsed: now - changed });
+      }
+    }
+  }
+
+  if (overdue.length === 0) {
+    return { content: `${timeGreeting()}\nNo devices have been on for more than 4 hours! 🎉 Everyone's being a good energy citizen! ✨` };
+  }
+
+  const greeting = timeGreeting();
+  const lines = overdue.map(d => {
+    const emoji = d.type === 'fan' ? '🌀' : '💡';
+    return `  ${emoji} ${d.name} in \`${d.room}\` — ${formatDurationVerbose(d.elapsed)}`;
+  });
+
+  return { content: `${greeting}\nUh oh! These devices have been on for a *while*... ⏰\n\n${lines.join('\n')}\n\n🤔 Maybe time to send a friendly reminder?` };
+}
+
+// ── !top command ───────────────────────────────────────────────
+
+function handleTop(data) {
+  const rooms = data.rooms || {};
+  const roomPower = [];
+
+  for (const [roomName, roomData] of Object.entries(rooms)) {
+    let totalW = 0;
+    let onCount = 0;
+
+    for (const dev of Object.values(roomData.fans || {})) {
+      if (dev.isSwitchedOn) { totalW += dev.watts || 0; onCount++; }
+    }
+    for (const dev of Object.values(roomData.lights || {})) {
+      if (dev.isSwitchedOn) { totalW += dev.watts || 0; onCount++; }
+    }
+
+    roomPower.push({ name: roomName, watts: totalW, on: onCount });
+  }
+
+  // Sort descending by power
+  roomPower.sort((a, b) => b.watts - a.watts);
+
+  const totalAll = roomPower.reduce((s, r) => s + r.watts, 0);
+  const greeting = timeGreeting();
+
+  if (totalAll === 0) {
+    return { content: `${greeting}\nNothing is running anywhere! The whole office is powered down. Zero watts, zero worries! 😴✨` };
+  }
+
+  const lines = roomPower.map((r, i) => {
+    const medals = ['🥇', '🥈', '🥉'];
+    const medal = medals[i] || `  ${i + 1}`;
+    const pct = ((r.watts / totalAll) * 100).toFixed(0);
+    return `  ${medal} \`${r.name}\` — ${r.watts}W (${r.on} device${r.on !== 1 ? 's' : ''} on, ${pct}% of total)`;
+  });
+
+  return { content: `${greeting}\nThe Power Rankings! 🏆⚡\n\n${lines.join('\n')}\n\n📊 **Grand total: ${totalAll}W** across all rooms` };
 }
 
 // ── Alert system ───────────────────────────────────────────────
@@ -358,8 +561,28 @@ client.on('messageCreate', async (message) => {
         await message.reply(result.content);
         break;
       }
+      case 'uptime': {
+        const result = handleUptime(data);
+        await message.reply(result.content);
+        break;
+      }
+      case 'energy': {
+        const result = handleEnergy(data);
+        await message.reply(result.content);
+        break;
+      }
+      case 'overdue': {
+        const result = handleOverdue(data);
+        await message.reply(result.content);
+        break;
+      }
+      case 'top': {
+        const result = handleTop(data);
+        await message.reply(result.content);
+        break;
+      }
       default:
-        await message.reply(`Unknown command. Try \`!status\`, \`!room <name>\`, or \`!usage\`.`);
+        await message.reply(`Unknown command. Try \`!status\`, \`!room <name>\`, \`!usage\`, \`!uptime\`, \`!energy\`, \`!overdue\`, or \`!top\`.`);
     }
   } catch (err) {
     await message.reply('❌ Sorry, I couldn\'t fetch the latest data. The Firebase service might be down.');
