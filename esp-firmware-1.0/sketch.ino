@@ -48,12 +48,14 @@ Device networkDevices[15] = {
 
 HTTPClient httpClient;
 
-// --- Energy Tracking Variables ---
-float totalDailyEnergyWh = 0.0;
+// --- Energy Tracking Variables (Fixed for Precision) ---
+double totalDailyEnergyWh = 0.0;             // Changed from float to double
 unsigned long lastEnergyCalcTime = 0;
 unsigned long lastFirebaseEnergyUpdate = 0;
-const unsigned long energyUpdateInterval = 10000; // Sync energy to Firebase every 10 seconds
-int lastResetDay = -1; // Keeps track of the day to ensure we only reset once at 9:00 AM
+
+const unsigned long energyCalcInterval = 1000; // Calculate energy exactly once every 1000ms (1 second)
+const unsigned long energyUpdateInterval = 10000; 
+int lastResetDay = -1;
 
 void printDashboard();
 void sendDataToFirebaseFast(String nodePath, String jsonPayload);
@@ -110,8 +112,10 @@ void setup() {
 }
 
 void loop() {
-  // 1. Continuously calculate dynamic energy consumption
-  calculateEnergyUsage();
+ // 1. Calculate dynamic energy consumption once every second (Prevents precision loss)
+  if (millis() - lastEnergyCalcTime >= energyCalcInterval) {
+    calculateEnergyUsage();
+  }
 
   // 2. Check if it's 9:00 AM to reset the counter
   checkAndResetAt9AM();
@@ -162,20 +166,24 @@ void loop() {
 }
 
 // Computes Wh consumption based on time delta passed since last check
+// Computes Wh consumption based on a stable 1-second time delta
+// Computes Wh consumption based on a stable 1-second time delta
 void calculateEnergyUsage() {
   unsigned long currentMillis = millis();
   unsigned long elapsedTimeMs = currentMillis - lastEnergyCalcTime;
-  lastEnergyCalcTime = currentMillis;
+  lastEnergyCalcTime = currentMillis; // Update checkpoint immediately
 
   float currentTotalLoadW = 0.0;
+  
+  // Check the physical pins directly: LOW means the appliance is physically drawing power
   for (int i = 0; i < 15; i++) {
-    if (networkDevices[i].isSwitchedOn) {
+    if (digitalRead(networkDevices[i].physicalPin) == LOW) { 
       currentTotalLoadW += networkDevices[i].maxWattage;
     }
   }
 
-  // Hours elapsed = milliseconds / (1000ms * 3600s)
-  float hoursElapsed = (float)elapsedTimeMs / 3600000.0;
+  // High precision double math ensures the values actually pile up in the database
+  double hoursElapsed = (double)elapsedTimeMs / 3600000.0;
   totalDailyEnergyWh += (currentTotalLoadW * hoursElapsed);
 }
 
