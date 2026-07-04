@@ -1,6 +1,5 @@
 # Techathon2026-NullPointer
-Repository for Techathon 2026 preliminary submission
-
+The given problem challenges one to create a web dashboard and a discord bot where the dashboard showcases the realtime database of the power being used in the whole office along with breakdown for per room. Along with that one can check the on/off status of the devices as well. Additionally the discord bot takes the same realtime data from the same backend and provides realtime data on the device status, power usage and highlights the anomalous situations. 
 
 
 ## System Schematic
