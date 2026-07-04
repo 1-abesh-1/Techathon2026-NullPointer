@@ -127,6 +127,15 @@
   filter: brightness(1.3);
 }
 
+/* Long-running device extra glow */
+.layout-device.long-running.is-on {
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.4));
+}
+
+.layout-device.long-running.is-on:hover {
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6)) brightness(1.3);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .layout-header-row {

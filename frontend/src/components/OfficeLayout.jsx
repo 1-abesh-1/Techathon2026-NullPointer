@@ -2,6 +2,7 @@ import React from 'react';
 import './OfficeLayout.css';
 import { DEVICE_POSITIONS, ROOM_LAYOUT } from '../config/deviceLayout';
 import { iterateDevices } from '../utils/roomData';
+import { getDeviceUptime } from '../utils/uptime';
 
 const OfficeLayout = ({ rooms }) => {
   const renderLight = (device) => {
@@ -9,11 +10,12 @@ const OfficeLayout = ({ rooms }) => {
     if (!position) return null;
     const { x: posX, y: posY } = position;
     const isOn = device.isSwitchedOn;
+    const uptime = getDeviceUptime(device);
 
     return (
       <g
         key={device.key}
-        className={`layout-device light-device ${isOn ? 'is-on' : 'is-off'}`}
+        className={`layout-device light-device ${isOn ? 'is-on' : 'is-off'} ${uptime?.isLongRunning ? 'long-running' : ''}`}
       >
         {isOn && (
           <circle cx={posX} cy={posY} r="28" className="light-glow-aura" />
@@ -28,7 +30,7 @@ const OfficeLayout = ({ rooms }) => {
           className="light-bulb-base"
         />
         <circle cx={posX} cy={posY} r="6" fill={isOn ? '#ffffff' : '#9ca3af'} />
-        <title>{`${device.deviceName} (${isOn ? 'ON' : 'OFF'})`}</title>
+        <title>{`${device.deviceName}\n${isOn ? `ON for ${uptime?.formatted || '...'}` : 'OFF'}\n${isOn ? `since ${device.lastChanged}` : ''}`}</title>
       </g>
     );
   };
@@ -38,11 +40,12 @@ const OfficeLayout = ({ rooms }) => {
     if (!position) return null;
     const { x: posX, y: posY } = position;
     const isOn = device.isSwitchedOn;
+    const uptime = getDeviceUptime(device);
 
     return (
       <g
         key={device.key}
-        className={`layout-device fan-device ${isOn ? 'is-on' : 'is-off'}`}
+        className={`layout-device fan-device ${isOn ? 'is-on' : 'is-off'} ${uptime?.isLongRunning ? 'long-running' : ''}`}
       >
         {isOn && (
           <circle cx={posX} cy={posY} r="32" className="fan-glow-aura" />
@@ -79,7 +82,7 @@ const OfficeLayout = ({ rooms }) => {
           strokeWidth="2"
         />
         <circle cx={posX} cy={posY} r="3" fill="#ffffff" />
-        <title>{`${device.deviceName} (${isOn ? 'ON' : 'OFF'})`}</title>
+        <title>{`${device.deviceName}\n${isOn ? `ON for ${uptime?.formatted || '...'}` : 'OFF'}\n${isOn ? `since ${device.lastChanged}` : ''}`}</title>
       </g>
     );
   };

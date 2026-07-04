@@ -200,6 +200,7 @@
 .device-status-badge {
   display: flex;
   align-items: center;
+  gap: 6px;
 }
 
 .status-badge {
@@ -222,6 +223,46 @@
   background: rgba(71, 85, 105, 0.2);
   color: #64748b;
   border: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+/* Uptime tag */
+.uptime-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #64748b;
+  background: rgba(100, 116, 139, 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.uptime-tag.uptime-long {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  animation: uptime-pulse 3s ease-in-out infinite;
+}
+
+@keyframes uptime-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(245, 158, 11, 0);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+  }
+}
+
+/* Long-running device row highlight */
+.device-row.long-running {
+  border-color: rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.03);
+}
+
+.device-row.long-running:hover {
+  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.06);
 }
 
 @media (max-width: 768px) {

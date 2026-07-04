@@ -1,6 +1,7 @@
 import React from 'react';
 import './DevicePanel.css';
 import { getRoomDevices, countDevices } from '../utils/roomData';
+import { getDeviceUptime } from '../utils/uptime';
 
 const DevicePanel = ({ rooms }) => {
   const { active: totalActive } = countDevices(rooms);
@@ -31,9 +32,10 @@ const DevicePanel = ({ rooms }) => {
                 {roomDevices.map((device) => {
                   const isOn = device.isSwitchedOn;
                   const isLight = device.category === 'lights';
+                  const uptime = getDeviceUptime(device);
 
                   return (
-                    <div key={device.key} className={`device-row ${isOn ? 'row-active' : ''}`}>
+                    <div key={device.key} className={`device-row ${isOn ? 'row-active' : ''} ${uptime?.isLongRunning ? 'long-running' : ''}`}>
                       <div className="device-info">
                         <div className={`device-icon-wrapper ${isOn ? 'icon-on' : ''} type-${device.category === 'lights' ? 'light' : 'fan'}`}>
                           {isLight ? (
@@ -56,6 +58,11 @@ const DevicePanel = ({ rooms }) => {
                         <span className={`status-badge ${isOn ? 'badge-on' : 'badge-off'}`}>
                           {isOn ? 'ON' : 'OFF'}
                         </span>
+                        {uptime && (
+                          <span className={`uptime-tag ${uptime.isLongRunning ? 'uptime-long' : ''}`} title={`On since ${device.lastChanged}`}>
+                            {uptime.formatted}
+                          </span>
+                        )}
                       </div>
                     </div>
                   );
