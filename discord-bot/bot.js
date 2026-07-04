@@ -273,17 +273,17 @@ function handleUptime(data) {
 
     for (const [devName, dev] of Object.entries(roomData.fans || {})) {
       const changed = parseLastChanged(dev.lastChanged);
-      if (changed) {
+      if (changed && dev.isSwitchedOn) {
         const elapsed = now - changed;
-        roomDevices.push({ name: devName, type: 'fan', elapsed, isOn: dev.isSwitchedOn });
+        roomDevices.push({ name: devName, type: 'fan', elapsed, isOn: true });
       }
     }
 
     for (const [devName, dev] of Object.entries(roomData.lights || {})) {
       const changed = parseLastChanged(dev.lastChanged);
-      if (changed) {
+      if (changed && dev.isSwitchedOn) {
         const elapsed = now - changed;
-        roomDevices.push({ name: devName, type: 'light', elapsed, isOn: dev.isSwitchedOn });
+        roomDevices.push({ name: devName, type: 'light', elapsed, isOn: true });
       }
     }
 
