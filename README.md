@@ -1,5 +1,12 @@
 # Techathon2026-NullPointer
 Repository for Techathon 2026 preliminary submission
+
+
+
+## System Schematic
+
+![System Schematic](https://raw.githubusercontent.com/1-abesh-1/Techathon2026-NullPointer/refs/heads/main/Schematic/IMG_20260704_135423.jpg)
+
 ## Project Setup
 
 ### 1. Clone the Repository
