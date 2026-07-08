@@ -3,7 +3,7 @@
 #include <HTTPClient.h>
 #include <time.h>
 
-#define DATABASE_URL "https://null-pointer-a3178-default-rtdb.firebaseio.com/"
+#define DATABASE_URL ""
 
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
